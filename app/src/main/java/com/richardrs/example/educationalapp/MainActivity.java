@@ -2,6 +2,7 @@ package com.richardrs.example.educationalapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -38,8 +39,44 @@ public class MainActivity extends AppCompatActivity {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 Exit.startAnimation(bonce);
-                System.out.println("LOL");
             }
         });
+
+        Play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                Play.startAnimation(bonce);
+            }
+        });
+
+        LBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                LBoard.startAnimation(bonce);
+            }
+        });
+
+        Share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                Share.startAnimation(bonce);
+            }
+        });
+
+        Settg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                Settg.startAnimation(bonce);
+            }
+        });
+
     }
 }
