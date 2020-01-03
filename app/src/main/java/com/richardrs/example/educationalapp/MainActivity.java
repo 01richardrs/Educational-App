@@ -1,7 +1,10 @@
 package com.richardrs.example.educationalapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -33,21 +36,14 @@ public class MainActivity extends AppCompatActivity {
         Share.startAnimation(bonce);
         Settg.startAnimation(bonce);
 
-        Exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bounce interpolator = new Bounce(0.3, 25);
-                bonce.setInterpolator(interpolator);
-                Exit.startAnimation(bonce);
-            }
-        });
-
         Play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 Play.startAnimation(bonce);
+                Intent Plays = new Intent(MainActivity.this,Play.class);
+                startActivity(Plays);
             }
         });
 
@@ -57,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 LBoard.startAnimation(bonce);
+                Intent Lboards = new Intent(MainActivity.this,Leaderboard.class);
+                startActivity(Lboards);
+
             }
         });
 
@@ -66,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 Share.startAnimation(bonce);
+                Intent shares = new Intent(android.content.Intent.ACTION_SEND);
+                shares.setType("text/plain");
+                String shareBody = "Download GAME NAME for freee noww CLICK HERE : ";
+                shares.putExtra(android.content.Intent.EXTRA_SUBJECT, "GAME NAME");
+                shares.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(shares, "Share via"));
             }
         });
 
@@ -75,8 +80,52 @@ public class MainActivity extends AppCompatActivity {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 Settg.startAnimation(bonce);
+                Intent settgs = new Intent(MainActivity.this,Settings.class);
+                startActivity(settgs);
+            }
+        });
+
+        Exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                Exit.startAnimation(bonce);
+                onBackPressed();
             }
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.app_name);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setMessage("Do you want to exit?")
+                .setCancelable(true)
+                .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setPositiveButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#326CFB"));
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#326CFB"));
+            }
+        });
+        alert.show();
+
+    }
+
 }
+
