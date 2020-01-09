@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 Play.startAnimation(bonce);
-                Intent Plays = new Intent(MainActivity.this,Play.class);
+                Intent Plays = new Intent(MainActivity.this,GameAct.class);
                 startActivity(Plays);
             }
         });
