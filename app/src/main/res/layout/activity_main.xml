@@ -7,14 +7,23 @@
     android:background="#FFF"
     tools:context=".MainActivity">
 
-    <pl.droidsonroids.gif.GifImageView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:src="@drawable/logos"
-        app:layout_constraintBottom_toTopOf="@+id/Play"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.050000012"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
         android:id="@+id/share"
@@ -23,17 +32,17 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/circ_button"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="10dp"
         android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         android:src="@drawable/shar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintEnd_toStartOf="@+id/setting"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Exit_but"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <ImageButton
         android:id="@+id/setting"
@@ -46,10 +55,10 @@
         android:src="@drawable/set"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Exit_but"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <Button
         android:id="@+id/Play"
@@ -57,20 +66,20 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:background="@drawable/button"
-        android:paddingLeft="30dp"
+        android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:paddingRight="30dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="Play"
         android:textColor="#FFF"
-        android:textSize="36dp"
+        android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/Leaderboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/Leaderboard"
@@ -78,40 +87,40 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:background="@drawable/button"
-        android:paddingLeft="30dp"
+        android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:paddingRight="30dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="Leaderboard"
         android:textColor="#FFF"
-        android:textSize="36dp"
+        android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/Exit_but"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/Exit_but"
-        android:background="@drawable/button"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="10dp"
-        android:layout_margin="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/button"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         android:text="Exit"
-        android:textSize="36dp"
-        android:textStyle="bold"
         android:textColor="#FFF"
+        android:textSize="28dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.797" />
+        app:layout_constraintVertical_bias="0.78" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
