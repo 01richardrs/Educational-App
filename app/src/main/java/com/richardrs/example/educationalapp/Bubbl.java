@@ -4,17 +4,22 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.view.MotionEvent;
+import android.view.View;
+
+import java.util.EventListener;
 
 import static com.richardrs.example.educationalapp.GameView.screenratX;
 import static com.richardrs.example.educationalapp.GameView.screenratY;
 
 
-public class Bubbl {
+public class Bubbl implements EventListener {
 
     public int speed = 20;
     int bubblecount = 1;
     int x=0,y , width,height;
     Bitmap bubbl1;
+
 
     Bubbl(Resources res){
 
@@ -67,5 +72,6 @@ public class Bubbl {
 ////        }
 
 //    }
+
 }
 

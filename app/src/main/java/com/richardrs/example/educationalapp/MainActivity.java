@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Share.startAnimation(bonce);
         Settg.startAnimation(bonce);
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.whitelady);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.whitelady);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
@@ -141,5 +141,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+    }
 }
 
