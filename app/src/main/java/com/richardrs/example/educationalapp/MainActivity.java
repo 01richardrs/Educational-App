@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-    int aa =0 ;
     private static MediaPlayer mediaPlayer;
 
     @Override
