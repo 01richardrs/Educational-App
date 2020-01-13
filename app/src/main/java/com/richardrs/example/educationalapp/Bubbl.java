@@ -17,8 +17,10 @@ public class Bubbl implements EventListener {
 
     public int speed = 20;
     int bubblecount = 1;
+    public boolean gettap = true;
     int x=0,y , width,height;
     Bitmap bubbl1;
+    boolean bubstat = true;
 
 
     Bubbl(Resources res){
@@ -73,5 +75,12 @@ public class Bubbl implements EventListener {
 
 //    }
 
+    public boolean isBubstat() {
+        return bubstat;
+    }
+
+    public void setBubstat(boolean bubstat) {
+        this.bubstat = bubstat;
+    }
 }
 

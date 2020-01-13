@@ -5,7 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import java.util.Random;
@@ -18,14 +22,41 @@ public class GameView extends SurfaceView implements Runnable {
     private int ScreenX,ScreenY;
     public static float screenratX,screenratY;
     private Paint paint;
+    private SoundPool soundPool;
+    private int sound,sound1,sound2;
     private Background background1,background2;
+    public int SCORE = 0;
 
     Rect maklo;
     private Bubbl[] bubble;
     private Random random;
 
+    //Games Rules
+    // LET THE FALSE BUB PASS GET SCORE IF HIT FALSE BUB - SCORE
+    // HIT EVERY RIGHT BUB IF RIGHT ONE PASS U DED
+
+
+
     public GameView(Context context, int ScreenX,int ScreenY) {
         super(context);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .build();
+
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+
+        } else
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+
+        sound = soundPool.load(context, R.raw.shooty, 1);
+        sound1 = soundPool.load(context, R.raw.gud, 2);
+        sound2 = soundPool.load(context, R.raw.wrong, 2);
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.whitelady);
         mediaPlayer.setLooping(true);
@@ -67,20 +98,40 @@ public class GameView extends SurfaceView implements Runnable {
 
     public void update() {
 
-        background1.x -= 10*screenratX;
-        background2.x -= 10*screenratX;
-
-        if(background1.x + background1.background.getWidth() < 0){
-            background1.x =ScreenX;
-        }
-        if(background2.x + background2.background.getWidth() < 0){
-            background2.x =ScreenX;
-        }
+//        background1.x -= 10*screenratX;
+//        background2.x -= 10*screenratX;
+//
+//        if(background1.x + background1.background.getWidth() < 0){
+//            background1.x =ScreenX;
+//        }
+//        if(background2.x + background2.background.getWidth() < 0){
+//            background2.x =ScreenX;
+//        }
 
     for (Bubbl bubbl : bubble){
         bubbl.x -= bubbl.speed;
 
         if(bubbl.x + bubbl.width <0 ){
+
+            if(!bubbl.gettap){
+                if(bubbl.isBubstat() == false){
+                    SCORE++;
+                }else{
+                    gameover = true;
+                    return;
+                }
+            }
+
+            int run = random.nextInt((1-0)+1)+0;
+
+            if(run == 0){
+                bubbl.setBubstat(true);
+            }else{
+                bubbl.setBubstat(false);
+            }
+
+
+
             int bound = (int) (13 *screenratX);
             bubbl.speed = random.nextInt(bound);
 
@@ -90,7 +141,8 @@ public class GameView extends SurfaceView implements Runnable {
 
             bubbl.x = ScreenX;
             bubbl.y = random.nextInt(ScreenY - bubbl.height);
-        }
+
+            bubbl.gettap = false;        }
     }
     }
     private void draw() {
@@ -101,15 +153,21 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawBitmap(background1.background,background1.x,background1.y,paint);
             canvas.drawBitmap(background2.background,background2.x,background2.y,paint);
 
-            Rect fku = new Rect(0,0,100,getHeight());
+            canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
+
+
+            Rect dedzone = new Rect(0,0,100,getHeight());
             paint.setColor(Color.RED);
-            canvas.drawRect(fku,paint);
+            canvas.drawRect(dedzone,paint);
 
             for (Bubbl bubbl : bubble){
+
 //                System.out.println("x"+bubbl.x +" y "+bubbl.y); //for check coordinate
                 canvas.drawBitmap(bubbl.getBubbl1(), bubbl.x, bubbl.y, paint);
-//                paint.setColor(Color.GREEN); // for check buble hit range
-//                canvas.drawRect(bubbl.getcolshape(), paint);
+                paint.setColor(Color.BLACK); // for check buble hit range
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(50);
+                canvas.drawText("5 + 2 = 7",bubbl.x+100,bubbl.y+150,paint);
             }
 //            if(maklo != null){ //debugmode to see user hit
 //              paint.setColor(Color.BLUE);
@@ -165,15 +223,22 @@ public class GameView extends SurfaceView implements Runnable {
         {
             case MotionEvent.ACTION_DOWN:
 
-
                 maklo = new Rect((int)x+100,(int)y+100,(int)x,(int)y);
+                soundPool.play(sound,1,1,0,0,1);
 
                 for (Bubbl bubbl : bubble){
+                    System.out.println("DOWN HEREE"+bubbl.isBubstat());
                     if(Rect.intersects(maklo,bubbl.getcolshape())){
-                        System.out.println("BUB GET HIT +"+bubbl);
+                        bubbl.x = -500;
+                        bubbl.gettap = true;
+                        if(bubbl.isBubstat()){
+                            SCORE++;
+                            soundPool.play(sound1,1,1,0,0,1);
+                        }else{
+                            SCORE--;
+                            soundPool.play(sound2,1,1,0,0,1);
+                        }
                         // add command if its get hit
-                    }else{
-                        System.out.println("NOT HIT :"+bubbl);
                     }
                 }
                 break;
