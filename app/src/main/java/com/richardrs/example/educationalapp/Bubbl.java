@@ -20,6 +20,7 @@ public class Bubbl implements EventListener {
     public boolean gettap = true;
     int x=0,y , width,height;
     Bitmap bubbl1;
+    String text;
     boolean bubstat = true;
 
 
@@ -81,6 +82,14 @@ public class Bubbl implements EventListener {
 
     public void setBubstat(boolean bubstat) {
         this.bubstat = bubstat;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
 

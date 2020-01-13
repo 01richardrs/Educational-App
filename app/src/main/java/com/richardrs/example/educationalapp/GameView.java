@@ -27,6 +27,67 @@ public class GameView extends SurfaceView implements Runnable {
     private Background background1,background2;
     public int SCORE = 0;
 
+    private String [] TrueQuestPlus = {
+            "5+2 = 7",
+            "9+4 = 13",
+            "7+2 = 9",
+            "5+7 = 12",
+            "2+5 = 7",
+    };
+    private String [] TrueQuestMin = {
+            "3-2 = 1",
+            "6-4 = 2",
+            "8-2 = 6",
+            "7-5 = 2",
+            "2-5 = -3",
+    };
+    private String [] TrueQuestTimes = {
+            "6*6 = 36",
+            "7*4 = 28",
+            "7*0 = 0",
+            "5*7 = 35",
+            "2*5 = 10",
+    };
+    private String [] TrueQuestDiv = {
+            "9/3 = 2",
+            "28/4 = 7",
+            "8/2 = 4",
+            "64/8 = 8",
+            "10/5 = 2",
+    };
+
+    private String [] FalseQuestPlus = {
+            "4+2 = 7",
+            "11+4 = 14",
+            "6+2 = 9",
+            "15+7 = 25",
+            "1+5 = 9",
+    };
+
+    private String [] FalseQuestMin = {
+            "2-2 = 1",
+            "4-4 = -1",
+            "8-2 = -6",
+            "7-5 = -2",
+            "12-5 = 6",
+    };
+
+    private String [] FalseQuestTimes = {
+            "6*6 = 26",
+            "5*4 = 24",
+            "7*0 = 7",
+            "6*7 = 45",
+            "3*5 = 13",
+    };
+
+    private String [] FalseQuestDiv = {
+            "6/3 = 3",
+            "4/4 = 0",
+            "18/2 = 8",
+            "32/4 = 9",
+            "25/5 = 6",
+    };
+
     Rect maklo;
     private Bubbl[] bubble;
     private Random random;
@@ -122,15 +183,15 @@ public class GameView extends SurfaceView implements Runnable {
                 }
             }
 
-            int run = random.nextInt((1-0)+1)+0;
+            int truenot = random.nextInt((1-0)+1)+0;
 
-            if(run == 0){
+            if(truenot == 0){
                 bubbl.setBubstat(true);
             }else{
                 bubbl.setBubstat(false);
             }
 
-
+            bubbl.setText(QuestionRandomizer(bubbl.isBubstat()));
 
             int bound = (int) (13 *screenratX);
             bubbl.speed = random.nextInt(bound);
@@ -167,7 +228,7 @@ public class GameView extends SurfaceView implements Runnable {
                 paint.setColor(Color.BLACK); // for check buble hit range
                 paint.setTextAlign(Paint.Align.CENTER);
                 paint.setTextSize(50);
-                canvas.drawText("5 + 2 = 7",bubbl.x+100,bubbl.y+150,paint);
+                canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+150,paint);
             }
 //            if(maklo != null){ //debugmode to see user hit
 //              paint.setColor(Color.BLUE);
@@ -244,6 +305,40 @@ public class GameView extends SurfaceView implements Runnable {
                 break;
         }
         return true;
+    }
+
+    public String QuestionRandomizer (Boolean cond){
+        String mama = "";
+        int morerand = random.nextInt((4-1)+1)+1;
+        int morerand2 = random.nextInt((5-1)+1)+1;
+        morerand2--;
+
+        if(cond){
+            if(morerand == 1){
+                mama = TrueQuestPlus[morerand2];
+            }else if(morerand == 2){
+                mama = TrueQuestMin[morerand2];
+            }else if(morerand == 3){
+                mama = TrueQuestTimes[morerand2];
+            }else if(morerand == 4){
+                mama = TrueQuestDiv[morerand2];
+            }else{
+                mama = "BONUS CORRECT";
+            }
+        }else{
+            if(morerand == 1){
+                mama = FalseQuestPlus[morerand2];
+            }else if(morerand == 2){
+                mama = FalseQuestMin[morerand2];
+            }else if(morerand == 3){
+                mama = FalseQuestTimes[morerand2];
+            }else if(morerand == 4){
+                mama = FalseQuestDiv[morerand2];
+            }else{
+                mama = "BONUS FALSE";
+            }
+        }
+        return mama;
     }
 
 }
