@@ -16,13 +16,13 @@ import static com.richardrs.example.educationalapp.GameView.screenratY;
 public class Bubbl implements EventListener {
 
     public int speed = 20;
-    int bubblecount = 1;
     public boolean gettap = true;
     int x=0,y , width,height;
     Bitmap bubbl1;
     String text;
     boolean bubstat = true;
 
+//    int bubblecount = 1;
 
     Bubbl(Resources res){
 
@@ -43,38 +43,30 @@ public class Bubbl implements EventListener {
 
     }
     Bitmap getBubbl1(){
-        if (bubblecount == 1) {
-            bubblecount++;
-            return bubbl1;
-        }
-
-        if (bubblecount == 2) {
-            bubblecount++;
-            return bubbl1;
-        }
-
-        if (bubblecount == 3) {
-            bubblecount++;
-            return bubbl1;
-        }
-
-        bubblecount = 1;
+//        if (bubblecount == 1) {
+//            bubblecount++;
+//            return bubbl1;
+//        }
+//
+//        if (bubblecount == 2) {
+//            bubblecount++;
+//            return bubbl1;
+//        }
+//
+//        if (bubblecount == 3) {
+//            bubblecount++;
+//            return bubbl1;
+//        }
+//
+//        bubblecount = 1;
+        //animation purpose
 
         return bubbl1;
     }
 
-
     Rect getcolshape(){
-        return new Rect(x,y,x+width,y+height);
+        return new Rect(x,y,x+width+50,y+height+70);
     }
-//    Bitmap getBubbl(){
-//// for animation
-////        if(bubblecount == 1){
-////            bubblecount++;
-//        return bubbl1;
-////        }
-
-//    }
 
     public boolean isBubstat() {
         return bubstat;

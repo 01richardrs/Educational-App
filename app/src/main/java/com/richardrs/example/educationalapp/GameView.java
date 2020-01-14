@@ -23,7 +23,7 @@ public class GameView extends SurfaceView implements Runnable {
     public static float screenratX,screenratY;
     private Paint paint;
     private SoundPool soundPool;
-    private int sound,sound1,sound2;
+    private int sound,sound1,sound2,soundbon1,soundbon2,soundbon3;
     private Background background1,background2;
     public int SCORE = 0;
 
@@ -49,7 +49,7 @@ public class GameView extends SurfaceView implements Runnable {
             "2*5 = 10",
     };
     private String [] TrueQuestDiv = {
-            "9/3 = 2",
+            "9/3 = 3",
             "28/4 = 7",
             "8/2 = 4",
             "64/8 = 8",
@@ -90,6 +90,8 @@ public class GameView extends SurfaceView implements Runnable {
 
     Rect maklo;
     private Bubbl[] bubble;
+    private Bonus bonus = new Bonus(getResources());
+    private Bonus bonuscontainer;
     private Random random;
 
     //Games Rules
@@ -118,6 +120,10 @@ public class GameView extends SurfaceView implements Runnable {
         sound = soundPool.load(context, R.raw.shooty, 1);
         sound1 = soundPool.load(context, R.raw.gud, 2);
         sound2 = soundPool.load(context, R.raw.wrong, 2);
+        soundbon1 = soundPool.load(context,R.raw.bum,2);
+        soundbon2 = soundPool.load(context,R.raw.up,2);
+        soundbon3 = soundPool.load(context,R.raw.down,2);
+
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.whitelady);
         mediaPlayer.setLooping(true);
@@ -136,6 +142,8 @@ public class GameView extends SurfaceView implements Runnable {
         paint = new Paint();
 
         bubble = new Bubbl[5];//array depend on how much pic need for animation
+        bonuscontainer = bonus;
+
 
         for (int i = 0;i < 5;i++) {
 
@@ -169,6 +177,35 @@ public class GameView extends SurfaceView implements Runnable {
 //            background2.x =ScreenX;
 //        }
 
+
+
+        bonuscontainer.x -= bonuscontainer.speed;
+
+        if(bonuscontainer.x +bonuscontainer.width <0){
+            int bound = (int) (20 *screenratX);
+            bonuscontainer.speed = random.nextInt(bound);
+
+            int bonusrand = random.nextInt((100-0)+1)+0;
+            if(bonusrand >= 85){
+                bonuscontainer.setLucknum(1);
+            }else if (bonusrand >= 55){
+                bonuscontainer.setLucknum(2);
+            }else{
+                bonuscontainer.setLucknum(3);
+            }
+            System.out.println("RAND"+bonusrand+"    LUCK"+bonuscontainer.lucknum);
+
+            if(bonuscontainer.speed < 15*screenratX){
+                bonuscontainer.speed = (int) (15*screenratX);
+            }
+
+            bonuscontainer.x = ScreenX;
+            bonuscontainer.y = random.nextInt(ScreenY - bonuscontainer.height);
+
+            bonuscontainer.gettap = false;
+        }
+
+
     for (Bubbl bubbl : bubble){
         bubbl.x -= bubbl.speed;
 
@@ -178,8 +215,8 @@ public class GameView extends SurfaceView implements Runnable {
                 if(bubbl.isBubstat() == false){
                     SCORE++;
                 }else{
-                    gameover = true;
-                    return;
+//                    gameover = true;
+//                    return;
                 }
             }
 
@@ -203,7 +240,8 @@ public class GameView extends SurfaceView implements Runnable {
             bubbl.x = ScreenX;
             bubbl.y = random.nextInt(ScreenY - bubbl.height);
 
-            bubbl.gettap = false;        }
+            bubbl.gettap = false;
+        }
     }
     }
     private void draw() {
@@ -221,6 +259,13 @@ public class GameView extends SurfaceView implements Runnable {
             paint.setColor(Color.RED);
             canvas.drawRect(dedzone,paint);
 
+            if(bonuscontainer.lucknum==1){
+                canvas.drawBitmap(bonuscontainer.getBonus1(),bonuscontainer.x,bonuscontainer.y,paint);
+            }else if(bonuscontainer.lucknum == 2){
+                canvas.drawBitmap(bonuscontainer.getBonus2(),bonuscontainer.x,bonuscontainer.y,paint);
+            }else{
+                canvas.drawBitmap(bonuscontainer.getBonus3(),bonuscontainer.x,bonuscontainer.y,paint);
+            }
             for (Bubbl bubbl : bubble){
 
 //                System.out.println("x"+bubbl.x +" y "+bubbl.y); //for check coordinate
@@ -287,8 +332,20 @@ public class GameView extends SurfaceView implements Runnable {
                 maklo = new Rect((int)x+100,(int)y+100,(int)x,(int)y);
                 soundPool.play(sound,1,1,0,0,1);
 
+                if(Rect.intersects(maklo,bonuscontainer.getcolshape())){
+                    if(bonuscontainer.lucknum == 1){
+                        soundPool.play(soundbon1,1,1,0,0,1);
+                        gameover = true;
+                    }else if(bonuscontainer.lucknum == 2){
+                        soundPool.play(soundbon2,1,1,0,0,1);
+                        SCORE= SCORE +5;
+                    }else{
+                        soundPool.play(soundbon3,1,1,0,0,1);
+                        SCORE= SCORE -5;
+                    }
+                }
+
                 for (Bubbl bubbl : bubble){
-                    System.out.println("DOWN HEREE"+bubbl.isBubstat());
                     if(Rect.intersects(maklo,bubbl.getcolshape())){
                         bubbl.x = -500;
                         bubbl.gettap = true;
@@ -296,9 +353,11 @@ public class GameView extends SurfaceView implements Runnable {
                             SCORE++;
                             soundPool.play(sound1,1,1,0,0,1);
                         }else{
-                            SCORE--;
+                            SCORE=SCORE-2;
                             soundPool.play(sound2,1,1,0,0,1);
                         }
+
+
                         // add command if its get hit
                     }
                 }
