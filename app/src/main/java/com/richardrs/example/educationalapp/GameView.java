@@ -168,9 +168,9 @@ public class GameView extends SurfaceView implements Runnable {
             public void run() {
                 int newposX = random.nextInt((getWidth()-100)+1)-100;
                 posX = newposX;
-                new Handler().postDelayed(runnable,6000);
+                new Handler().postDelayed(runnable,180000);
             }};
-        new Handler().postDelayed(runnable,6000);
+        new Handler().postDelayed(runnable,180000);
 
     }
 
@@ -258,11 +258,11 @@ public class GameView extends SurfaceView implements Runnable {
 
             bubbl.setText(QuestionRandomizer(bubbl.isBubstat()));
 
-            int bound = (int) (13 *screenratX);
+            int bound = (int) (9 *screenratX);
             bubbl.speed = random.nextInt(bound);
 
-            if(bubbl.speed < 5*screenratX){
-                bubbl.speed = (int) (5*screenratX);
+            if(bubbl.speed < 4*screenratX){
+                bubbl.speed = (int) (4*screenratX);
             }
 
             bubbl.x = ScreenX;
@@ -312,7 +312,7 @@ public class GameView extends SurfaceView implements Runnable {
 //                canvas.drawRect(maklo,paint);
 //            }
             canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
-            
+
             if(gameover){
                 isplay = false;
                 getHolder().unlockCanvasAndPost(canvas);

@@ -29,8 +29,8 @@ public class Bonus implements EventListener {
         width = bonus1.getWidth();
         height = bonus1.getHeight();
 
-        width /= 4;
-        height /= 4;
+        width /= 5;
+        height /= 5;
 
         width += (int) (width * screenratX);
         height += (int) (height* screenratY);
