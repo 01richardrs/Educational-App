@@ -13,7 +13,9 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             ></activity>
-        <activity android:name=".Play" />
+        <activity android:name=".GameOver"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Translucent"/>
         <activity android:name=".Leaderboard" />
         <activity android:name=".Settings" />
         <activity

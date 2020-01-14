@@ -1,6 +1,8 @@
 package com.richardrs.example.educationalapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,14 +16,14 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameView extends SurfaceView implements Runnable {
-    private static MediaPlayer mediaPlayer;
+
+
+    public static MediaPlayer mediaPlayer;
     private Thread thread;
     private boolean isplay;
-    private boolean gameover = false; // for the time
+    public boolean gameover = false; // for the time
     private int ScreenX,ScreenY;
     public static float screenratX,screenratY;
     private Paint paint;
@@ -112,6 +114,7 @@ public class GameView extends SurfaceView implements Runnable {
     public GameView(Context context, int ScreenX,int ScreenY) {
         super(context);
 
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -182,6 +185,9 @@ public class GameView extends SurfaceView implements Runnable {
             draw();
             sleep();
         }
+        MainActivity.fa.finish();
+        Intent maklo = new Intent(getContext(), GameOver.class);
+        getContext().startActivity(maklo);
 
     }
 
@@ -243,8 +249,8 @@ public class GameView extends SurfaceView implements Runnable {
                 if(bubbl.isBubstat() == false){
                     SCORE++;
                 }else{
-//                    gameover = true;
-//                    return;
+                    gameover = true;
+                    return;
                 }
             }
 
