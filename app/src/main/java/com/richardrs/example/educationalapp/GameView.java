@@ -49,7 +49,7 @@ public class GameView extends SurfaceView implements Runnable {
             "2*5 = 10",
     };
     private String [] TrueQuestDiv = {
-            "9/3 = 2",
+            "9/3 = 3",
             "28/4 = 7",
             "8/2 = 4",
             "64/8 = 8",
