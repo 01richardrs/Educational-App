@@ -1,6 +1,8 @@
 package com.richardrs.example.educationalapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -23,7 +25,7 @@ public class GameView extends SurfaceView implements Runnable {
     public static float screenratX,screenratY;
     private Paint paint;
     private SoundPool soundPool;
-    private int sound,sound1,sound2,soundbon1,soundbon2,soundbon3;
+    private int sound,sound1,sound2,soundbon1,soundbon2,soundbon3,soundblockarea;
     private Background background1,background2;
     public int SCORE = 0;
 
@@ -92,6 +94,10 @@ public class GameView extends SurfaceView implements Runnable {
     private Bubbl[] bubble;
     private Bonus bonus = new Bonus(getResources());
     private Bonus bonuscontainer;
+
+    private BLOCK block =  new BLOCK(getResources());
+    private BLOCK blockcontainer;
+
     private Random random;
 
     //Games Rules
@@ -123,6 +129,7 @@ public class GameView extends SurfaceView implements Runnable {
         soundbon1 = soundPool.load(context,R.raw.bum,2);
         soundbon2 = soundPool.load(context,R.raw.up,2);
         soundbon3 = soundPool.load(context,R.raw.down,2);
+        soundblockarea = soundPool.load(context,R.raw.puff,3);
 
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.whitelady);
@@ -143,6 +150,7 @@ public class GameView extends SurfaceView implements Runnable {
 
         bubble = new Bubbl[5];//array depend on how much pic need for animation
         bonuscontainer = bonus;
+        blockcontainer = block;
 
 
         for (int i = 0;i < 5;i++) {
@@ -167,6 +175,8 @@ public class GameView extends SurfaceView implements Runnable {
 
     public void update() {
 
+        blockcontainer.x = 200;
+
 //        background1.x -= 10*screenratX;
 //        background2.x -= 10*screenratX;
 //
@@ -179,7 +189,6 @@ public class GameView extends SurfaceView implements Runnable {
 
         if(bonuscontainer.gettap){
             int bonusrand = random.nextInt((1000-0)+1)+0;
-            System.out.println(bonusrand);
             if(bonusrand <=180 && bonusrand>=170){
                 bonuscontainer.setGettap(false);
             }
@@ -221,8 +230,8 @@ public class GameView extends SurfaceView implements Runnable {
                 if(bubbl.isBubstat() == false){
                     SCORE++;
                 }else{
-                    gameover = true;
-                    return;
+//                    gameover = true;
+//                    return;
                 }
             }
 
@@ -261,9 +270,14 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
 
 
-//            Rect dedzone = new Rect(0,0,100,getHeight());
-//            paint.setColor(Color.RED);
-//            canvas.drawRect(dedzone,paint);
+            Rect dedzone = new Rect(0,0,100,getHeight());
+            paint.setColor(Color.RED);
+            canvas.drawRect(dedzone,paint);
+
+
+            canvas.drawBitmap(blockcontainer.getBlockarea(),blockcontainer.x,0,paint);
+
+
             if(!bonuscontainer.gettap){
                 if(bonuscontainer.lucknum==1){
                     canvas.drawBitmap(bonuscontainer.getBonus1(),bonuscontainer.x,bonuscontainer.y,paint);
@@ -340,35 +354,53 @@ public class GameView extends SurfaceView implements Runnable {
                 maklo = new Rect((int)x+100,(int)y+100,(int)x,(int)y);
                 soundPool.play(sound,1,1,0,0,1);
 
-                if(Rect.intersects(maklo,bonuscontainer.getcolshape())){
-                    bonuscontainer.x = -500;
-                    bonuscontainer.setGettap(true);
-                    if(bonuscontainer.lucknum == 1){
-                        soundPool.play(soundbon1,1,1,0,0,1);
-                        gameover = true;
-                    }else if(bonuscontainer.lucknum == 2){
-                        soundPool.play(soundbon2,1,1,0,0,1);
-                        SCORE= SCORE +5;
-                    }else{
-                        soundPool.play(soundbon3,1,1,0,0,1);
-                        SCORE= SCORE -5;
-                    }
-                }
-                for (Bubbl bubbl : bubble){
-                    if(Rect.intersects(maklo,bubbl.getcolshape())){
-                        bubbl.x = -500;
-                        bubbl.gettap = true;
-                        if(bubbl.isBubstat()){
-                            SCORE++;
-                            soundPool.play(sound1,1,1,0,0,1);
-                        }else{
-                            SCORE=SCORE-2;
-                            soundPool.play(sound2,1,1,0,0,1);
-                        }
+                if(Rect.intersects(maklo,blockcontainer.getcolshape())){
+                    for (Bubbl bubbl : bubble){
+                        if(Rect.intersects(maklo,bubbl.getcolshape())){
+                            bubbl.x = -500;
+                            bubbl.gettap = true;
+                            if(bubbl.isBubstat()){
+                                SCORE--;
+                                soundPool.play(soundblockarea,1,1,0,0,1);
+                            }else{
+                                SCORE=SCORE-4;
+                                soundPool.play(soundblockarea,1,1,0,0,1);
+                            }
 
+                        }
                     }
+                    break;
+                }else{
+                    if(Rect.intersects(maklo,bonuscontainer.getcolshape())){
+                        bonuscontainer.x = -500;
+                        bonuscontainer.setGettap(true);
+                        if(bonuscontainer.lucknum == 1){
+                            soundPool.play(soundbon1,1,1,0,0,1);
+                            gameover = true;
+                        }else if(bonuscontainer.lucknum == 2){
+                            soundPool.play(soundbon2,1,1,0,0,1);
+                            SCORE= SCORE +5;
+                        }else{
+                            soundPool.play(soundbon3,1,1,0,0,1);
+                            SCORE= SCORE -5;
+                        }
+                    }
+                    for (Bubbl bubbl : bubble){
+                        if(Rect.intersects(maklo,bubbl.getcolshape())){
+                            bubbl.x = -500;
+                            bubbl.gettap = true;
+                            if(bubbl.isBubstat()){
+                                SCORE++;
+                                soundPool.play(sound1,1,1,0,0,1);
+                            }else{
+                                SCORE=SCORE-2;
+                                soundPool.play(sound2,1,1,0,0,1);
+                            }
+
+                        }
+                    }
+                    break;
                 }
-                break;
         }
         return true;
     }
