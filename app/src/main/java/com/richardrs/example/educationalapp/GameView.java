@@ -1,8 +1,6 @@
 package com.richardrs.example.educationalapp;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,9 +10,12 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameView extends SurfaceView implements Runnable {
     private static MediaPlayer mediaPlayer;
@@ -99,6 +100,8 @@ public class GameView extends SurfaceView implements Runnable {
     private BLOCK blockcontainer;
 
     private Random random;
+    Runnable runnable;
+    private int posX = 200;
 
     //Games Rules
     // LET THE FALSE BUB PASS GET SCORE IF HIT FALSE BUB - SCORE
@@ -160,6 +163,15 @@ public class GameView extends SurfaceView implements Runnable {
 
         }
         random = new Random();
+
+        runnable  = new Runnable() {
+            public void run() {
+                int newposX = random.nextInt((getWidth()-100)+1)-100;
+                posX = newposX;
+                new Handler().postDelayed(runnable,6000);
+            }};
+        new Handler().postDelayed(runnable,6000);
+
     }
 
     @Override
@@ -175,7 +187,8 @@ public class GameView extends SurfaceView implements Runnable {
 
     public void update() {
 
-        blockcontainer.x = 200;
+        blockcontainer.x = posX;
+        blockcontainer.setX(posX);
 
 //        background1.x -= 10*screenratX;
 //        background2.x -= 10*screenratX;
@@ -267,9 +280,6 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawBitmap(background1.background,background1.x,background1.y,paint);
             canvas.drawBitmap(background2.background,background2.x,background2.y,paint);
 
-            canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
-
-
             Rect dedzone = new Rect(0,0,100,getHeight());
             paint.setColor(Color.RED);
             canvas.drawRect(dedzone,paint);
@@ -301,7 +311,8 @@ public class GameView extends SurfaceView implements Runnable {
 //              paint.setColor(Color.BLUE);
 //                canvas.drawRect(maklo,paint);
 //            }
-
+            canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
+            
             if(gameover){
                 isplay = false;
                 getHolder().unlockCanvasAndPost(canvas);
@@ -438,5 +449,6 @@ public class GameView extends SurfaceView implements Runnable {
         }
         return mama;
     }
+
 
 }

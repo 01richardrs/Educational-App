@@ -35,5 +35,8 @@ public class BLOCK implements EventListener {
         return new Rect(x,y,x+300,2000);
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
 }
 
