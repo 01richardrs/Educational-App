@@ -177,9 +177,15 @@ public class GameView extends SurfaceView implements Runnable {
 //            background2.x =ScreenX;
 //        }
 
-
-
-        bonuscontainer.x -= bonuscontainer.speed;
+        if(bonuscontainer.gettap){
+            int bonusrand = random.nextInt((1000-0)+1)+0;
+            System.out.println(bonusrand);
+            if(bonusrand <=180 && bonusrand>=170){
+                bonuscontainer.setGettap(false);
+            }
+        }else{
+            bonuscontainer.x -= bonuscontainer.speed;
+        }
 
         if(bonuscontainer.x +bonuscontainer.width <0){
             int bound = (int) (20 *screenratX);
@@ -193,7 +199,7 @@ public class GameView extends SurfaceView implements Runnable {
             }else{
                 bonuscontainer.setLucknum(3);
             }
-            System.out.println("RAND"+bonusrand+"    LUCK"+bonuscontainer.lucknum);
+
 
             if(bonuscontainer.speed < 15*screenratX){
                 bonuscontainer.speed = (int) (15*screenratX);
@@ -202,7 +208,7 @@ public class GameView extends SurfaceView implements Runnable {
             bonuscontainer.x = ScreenX;
             bonuscontainer.y = random.nextInt(ScreenY - bonuscontainer.height);
 
-            bonuscontainer.gettap = false;
+            bonuscontainer.setGettap(true);
         }
 
 
@@ -215,8 +221,8 @@ public class GameView extends SurfaceView implements Runnable {
                 if(bubbl.isBubstat() == false){
                     SCORE++;
                 }else{
-//                    gameover = true;
-//                    return;
+                    gameover = true;
+                    return;
                 }
             }
 
@@ -255,17 +261,19 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
 
 
-            Rect dedzone = new Rect(0,0,100,getHeight());
-            paint.setColor(Color.RED);
-            canvas.drawRect(dedzone,paint);
-
-            if(bonuscontainer.lucknum==1){
-                canvas.drawBitmap(bonuscontainer.getBonus1(),bonuscontainer.x,bonuscontainer.y,paint);
-            }else if(bonuscontainer.lucknum == 2){
-                canvas.drawBitmap(bonuscontainer.getBonus2(),bonuscontainer.x,bonuscontainer.y,paint);
-            }else{
-                canvas.drawBitmap(bonuscontainer.getBonus3(),bonuscontainer.x,bonuscontainer.y,paint);
+//            Rect dedzone = new Rect(0,0,100,getHeight());
+//            paint.setColor(Color.RED);
+//            canvas.drawRect(dedzone,paint);
+            if(!bonuscontainer.gettap){
+                if(bonuscontainer.lucknum==1){
+                    canvas.drawBitmap(bonuscontainer.getBonus1(),bonuscontainer.x,bonuscontainer.y,paint);
+                }else if(bonuscontainer.lucknum == 2){
+                    canvas.drawBitmap(bonuscontainer.getBonus2(),bonuscontainer.x,bonuscontainer.y,paint);
+                }else{
+                    canvas.drawBitmap(bonuscontainer.getBonus3(),bonuscontainer.x,bonuscontainer.y,paint);
+                }
             }
+
             for (Bubbl bubbl : bubble){
 
 //                System.out.println("x"+bubbl.x +" y "+bubbl.y); //for check coordinate
@@ -333,6 +341,8 @@ public class GameView extends SurfaceView implements Runnable {
                 soundPool.play(sound,1,1,0,0,1);
 
                 if(Rect.intersects(maklo,bonuscontainer.getcolshape())){
+                    bonuscontainer.x = -500;
+                    bonuscontainer.setGettap(true);
                     if(bonuscontainer.lucknum == 1){
                         soundPool.play(soundbon1,1,1,0,0,1);
                         gameover = true;
@@ -344,7 +354,6 @@ public class GameView extends SurfaceView implements Runnable {
                         SCORE= SCORE -5;
                     }
                 }
-
                 for (Bubbl bubbl : bubble){
                     if(Rect.intersects(maklo,bubbl.getcolshape())){
                         bubbl.x = -500;
@@ -357,8 +366,6 @@ public class GameView extends SurfaceView implements Runnable {
                             soundPool.play(sound2,1,1,0,0,1);
                         }
 
-
-                        // add command if its get hit
                     }
                 }
                 break;

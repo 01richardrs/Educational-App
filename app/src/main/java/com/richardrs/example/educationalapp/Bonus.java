@@ -66,5 +66,9 @@ public class Bonus implements EventListener {
     public void setLucknum(int lucknum) {
         this.lucknum = lucknum;
     }
+
+    public void setGettap(boolean gettap) {
+        this.gettap = gettap;
+    }
 }
 
