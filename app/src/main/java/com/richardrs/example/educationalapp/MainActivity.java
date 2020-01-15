@@ -36,11 +36,15 @@ public class MainActivity extends AppCompatActivity {
         final Button LBoard = (Button)findViewById(R.id.Leaderboard);
         final ImageButton Share = (ImageButton)findViewById(R.id.share);
         final ImageButton Settg = (ImageButton)findViewById(R.id.setting);
+        final ImageButton Voise = (ImageButton)findViewById(R.id.voise);
+        final ImageButton Qmark = (ImageButton)findViewById(R.id.qmark);
 
         final Animation bonce = AnimationUtils.loadAnimation(this, R.anim.bounce);
         Bounce interpolator = new Bounce(0.2, 20);
         bonce.setInterpolator(interpolator);
 
+        Voise.startAnimation(bonce);
+        Qmark.startAnimation(bonce);
         Exit.startAnimation(bonce);
         Play.startAnimation(bonce);
         LBoard.startAnimation(bonce);
@@ -108,6 +112,24 @@ public class MainActivity extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 Exit.startAnimation(bonce);
                 onBackPressed();
+            }
+        });
+
+        Voise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                Voise.startAnimation(bonce);
+            }
+        });
+
+        Qmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                Qmark.startAnimation(bonce);
             }
         });
 

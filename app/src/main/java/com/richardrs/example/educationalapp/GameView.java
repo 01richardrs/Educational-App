@@ -171,9 +171,10 @@ public class GameView extends SurfaceView implements Runnable {
             public void run() {
                 int newposX = random.nextInt((getWidth()-100)+1)-100;
                 posX = newposX;
-                new Handler().postDelayed(runnable,180000);
+                new Handler().postDelayed(runnable,60000);
+                System.out.println("AHSJAKJSHKAJS");
             }};
-        new Handler().postDelayed(runnable,180000);
+        new Handler().postDelayed(runnable,60000);
 
     }
 

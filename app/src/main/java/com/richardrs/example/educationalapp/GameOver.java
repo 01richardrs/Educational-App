@@ -42,6 +42,7 @@ public class GameOver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.fa.finish();
+                finish();
                 Intent maklo = new Intent(GameOver.this, MainActivity.class);
                 startActivity(maklo);
             }
@@ -69,6 +70,7 @@ public class GameOver extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         MainActivity.fa.finish();
+        finish();
         Intent maklo = new Intent(GameOver.this, MainActivity.class);
         startActivity(maklo);
     }
