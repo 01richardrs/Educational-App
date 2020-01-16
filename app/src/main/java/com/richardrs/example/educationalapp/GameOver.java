@@ -41,6 +41,7 @@ public class GameOver extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GameAct.fa.finish();
                 MainActivity.fa.finish();
                 finish();
                 Intent maklo = new Intent(GameOver.this, MainActivity.class);
@@ -51,6 +52,7 @@ public class GameOver extends AppCompatActivity {
         leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GameAct.fa.finish();
                 finish();
                 Intent maklo = new Intent(GameOver.this, Leaderboard.class);
                 startActivity(maklo);
@@ -60,6 +62,7 @@ public class GameOver extends AppCompatActivity {
         playagain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GameAct.fa.finish();
                 MainActivity.fa.finish();
                 Intent Plays = new Intent(GameOver.this,GameAct.class);
                 startActivity(Plays);

@@ -4,13 +4,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +23,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private static MediaPlayer mediaPlayer;
@@ -52,9 +59,20 @@ public class MainActivity extends AppCompatActivity {
         Settg.startAnimation(bonce);
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.whitelady);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+        SharedPreferences preferences = getSharedPreferences("Pref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = preferences.edit();
 
+         final boolean BG_SOUND = preferences.getBoolean("BG_VOICE", true);
+         final boolean[] current = {BG_SOUND};
+
+        if (current[0]){
+            Voise.setImageResource(R.drawable.voicew);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+        }else {
+            Voise.setImageResource(R.drawable.voiceoffw);
+            mediaPlayer.stop();
+        }
 
         Play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +139,19 @@ public class MainActivity extends AppCompatActivity {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 Voise.startAnimation(bonce);
+                if(current[0]){
+                    Voise.setImageResource(R.drawable.voiceoffw);
+                    current[0] = false;
+                    mediaPlayer.stop();
+                }else{
+                    Voise.setImageResource(R.drawable.voicew);
+                    current[0] = true;
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.whitelady);
+                    mediaPlayer.setLooping(true);
+                    mediaPlayer.start();
+                }
+                editor.putBoolean("BG_VOICE",current[0]);
+                editor.apply();
             }
         });
 
@@ -130,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
                 Bounce interpolator = new Bounce(0.3, 25);
                 bonce.setInterpolator(interpolator);
                 Qmark.startAnimation(bonce);
+                Intent howto = new Intent(MainActivity.this,HowToPlay.class);
+                startActivity(howto);
             }
         });
 
@@ -176,5 +209,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         mediaPlayer.start();
     }
+
+
 }
 

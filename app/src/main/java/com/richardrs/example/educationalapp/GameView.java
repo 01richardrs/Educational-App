@@ -138,9 +138,9 @@ public class GameView extends SurfaceView implements Runnable {
         soundblockarea = soundPool.load(context,R.raw.puff,3);
 
 
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.whitelady);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+//        mediaPlayer = MediaPlayer.create(getContext(), R.raw.whitelady);
+//        mediaPlayer.setLooping(true);
+//        mediaPlayer.start();
 
         this.ScreenX = ScreenX;
         this.ScreenY = ScreenY;
@@ -172,7 +172,6 @@ public class GameView extends SurfaceView implements Runnable {
                 int newposX = random.nextInt((getWidth()-100)+1)-100;
                 posX = newposX;
                 new Handler().postDelayed(runnable,60000);
-                System.out.println("AHSJAKJSHKAJS");
             }};
         new Handler().postDelayed(runnable,60000);
 

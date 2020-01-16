@@ -61,7 +61,7 @@
         app:layout_constraintVertical_bias="0.060000002" />
 
     <ImageButton
-        android:id="@+id/voise"
+        android:id="@+id/qmark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -80,7 +80,7 @@
         app:layout_constraintVertical_bias="0.061" />
 
     <ImageButton
-        android:id="@+id/qmark"
+        android:id="@+id/voise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

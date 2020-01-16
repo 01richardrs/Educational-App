@@ -2,6 +2,7 @@ package com.richardrs.example.educationalapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -9,10 +10,12 @@ import android.view.WindowManager;
 public class GameAct extends AppCompatActivity {
 
     private GameView gameView;
+    public static Activity fa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fa = this;
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 

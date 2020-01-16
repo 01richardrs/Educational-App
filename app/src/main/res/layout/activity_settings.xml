@@ -28,25 +28,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01999998" />
 
-    <ImageButton
-        android:id="@+id/sav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/circ_button"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:src="@drawable/korek"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01999998" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -227,6 +208,7 @@
                 android:src="@drawable/buburu" />
 
             <Button
+                android:id="@+id/Choice_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -243,21 +225,23 @@
             android:gravity="center">
 
             <RadioGroup
+                android:id="@+id/buble_choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/but1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
                     android:layout_marginRight="50dp"
-                    android:checked="true"
                     android:text="1"
                     tools:layout_editor_absoluteX="117dp"
                     tools:layout_editor_absoluteY="23dp" />
 
                 <RadioButton
+                    android:id="@+id/but2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -267,6 +251,7 @@
                     tools:layout_editor_absoluteY="23dp" />
 
                 <RadioButton
+                    android:id="@+id/but3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -276,6 +261,7 @@
                     tools:layout_editor_absoluteY="23dp" />
 
                 <RadioButton
+                    android:id="@+id/but4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
