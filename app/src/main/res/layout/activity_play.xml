@@ -41,6 +41,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/Current"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -63,6 +64,7 @@
                     android:text="Highest Score: " />
 
                 <TextView
+                    android:id="@+id/HIGH"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
@@ -82,28 +84,34 @@
             app:layout_constraintVertical_bias="0.75">
 
             <Button
+                android:padding="8dp"
                 android:id="@+id/backo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="10dp"
                 android:text="Back"
+                android:background="@drawable/button"
                 android:textColor="#FFF"
-                android:textSize="15dp"
+                android:textSize="22dp"
                 android:textStyle="bold" />
 
             <Button
+                android:padding="8dp"
+                android:background="@drawable/button"
                 android:id="@+id/Leaderboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="60dp"
-                android:text="Icon"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="Leaderboard"
                 android:textColor="#FFF"
-                android:textSize="15dp"
+                android:textSize="22dp"
                 android:textStyle="bold" />
 
             <Button
+                android:padding="8dp"
+                android:background="@drawable/button"
                 android:id="@+id/plei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,7 +119,7 @@
                 android:layout_marginRight="10dp"
                 android:text="Play Again"
                 android:textColor="#FFF"
-                android:textSize="15dp"
+                android:textSize="22dp"
                 android:textStyle="bold" />
         </LinearLayout>
 

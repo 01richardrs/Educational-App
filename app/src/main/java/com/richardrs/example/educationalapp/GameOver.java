@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +16,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 
 public class GameOver extends AppCompatActivity {
+    private SimpleDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +36,28 @@ public class GameOver extends AppCompatActivity {
         Button leaderboard = (Button)findViewById(R.id.Leaderboard);
         Button playagain = (Button)findViewById(R.id.plei);
 
+        TextView current_score = (TextView)findViewById(R.id.Current);
+        TextView HIGHEST_score = (TextView)findViewById(R.id.HIGH);
+
         maklo.getBackground().setAlpha(150);
 
         back.startAnimation(bonce);
         leaderboard.startAnimation(bonce);
         playagain.startAnimation(bonce);
+
+        SharedPreferences preferences = getSharedPreferences("Pref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        int Score = preferences.getInt("SCORE",0);
+
+        System.out.println(Score);
+
+        HIGHEST_score.setText(""+Score);
+        current_score.setText(""+Score);
+
+        db = new SimpleDatabase(this);
+        db.addScore(Score);
+        db.close();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

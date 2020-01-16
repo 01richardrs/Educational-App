@@ -179,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
+                        System.exit(0);
                     }
                 })
                 .setPositiveButton("No", new DialogInterface.OnClickListener() {

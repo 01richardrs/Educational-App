@@ -30,6 +30,7 @@ public class HowToPlay extends AppCompatActivity {
         final TextView Text = (TextView)findViewById(R.id.texto);
         final ImageButton Next = (ImageButton)findViewById(R.id.nexto);
         ConstraintLayout bg = (ConstraintLayout)findViewById(R.id.bg);
+        ImageButton back = (ImageButton)findViewById(R.id.bek);
 
         final String[] Guides = {
                 "Tap On The Right Question inside the Bubble and you get 1 Point",
@@ -62,6 +63,13 @@ public class HowToPlay extends AppCompatActivity {
         Scontainer = sound1;
         SFx.performClick();
         animations.setImageResource(R.drawable.howto1);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Next.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,8 +1,8 @@
 package com.richardrs.example.educationalapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,6 +16,8 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import java.util.Random;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class GameView extends SurfaceView implements Runnable {
 
@@ -93,7 +95,7 @@ public class GameView extends SurfaceView implements Runnable {
             "25/5 = 6",
     };
 
-    Rect maklo;
+    Rect Tap;
     private Bubbl[] bubble;
     private Bonus bonus = new Bonus(getResources());
     private Bonus bonuscontainer;
@@ -114,6 +116,8 @@ public class GameView extends SurfaceView implements Runnable {
     public GameView(Context context, int ScreenX,int ScreenY) {
         super(context);
 
+        SharedPreferences preferences = context.getSharedPreferences("Pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -136,11 +140,6 @@ public class GameView extends SurfaceView implements Runnable {
         soundbon2 = soundPool.load(context,R.raw.up,2);
         soundbon3 = soundPool.load(context,R.raw.down,2);
         soundblockarea = soundPool.load(context,R.raw.puff,3);
-
-
-//        mediaPlayer = MediaPlayer.create(getContext(), R.raw.whitelady);
-//        mediaPlayer.setLooping(true);
-//        mediaPlayer.start();
 
         this.ScreenX = ScreenX;
         this.ScreenY = ScreenY;
@@ -185,10 +184,6 @@ public class GameView extends SurfaceView implements Runnable {
             draw();
             sleep();
         }
-        MainActivity.fa.finish();
-        Intent maklo = new Intent(getContext(), GameOver.class);
-        getContext().startActivity(maklo);
-
     }
 
     public void update() {
@@ -313,15 +308,26 @@ public class GameView extends SurfaceView implements Runnable {
                 paint.setTextSize(50);
                 canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+150,paint);
             }
-//            if(maklo != null){ //debugmode to see user hit
+//            if(Tap != null){ //debugmode to see user hit
 //              paint.setColor(Color.BLUE);
-//                canvas.drawRect(maklo,paint);
+//                canvas.drawRect(Tap,paint);
 //            }
             canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
 
             if(gameover){
+                SharedPreferences preferences =
+                        getContext().getSharedPreferences("Pref",MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+
                 isplay = false;
                 getHolder().unlockCanvasAndPost(canvas);
+                MainActivity.fa.finish();
+
+                System.out.println(SCORE);
+
+                editor.putInt("SCORE",SCORE);
+                editor.apply();
+                getContext().startActivity(new Intent(getContext(),GameOver.class));
                 return;
             }
 
@@ -338,8 +344,6 @@ public class GameView extends SurfaceView implements Runnable {
             e.printStackTrace();
         }
     }
-
-
     public void resume() {
 
         isplay = true;
@@ -347,7 +351,6 @@ public class GameView extends SurfaceView implements Runnable {
         thread.start();
 
     }
-
     public void pause() {
 
         try {
@@ -368,19 +371,19 @@ public class GameView extends SurfaceView implements Runnable {
         {
             case MotionEvent.ACTION_DOWN:
 
-                maklo = new Rect((int)x+100,(int)y+100,(int)x,(int)y);
+                Tap = new Rect((int)x+100,(int)y+100,(int)x,(int)y);
                 soundPool.play(sound,1,1,0,0,1);
 
-                if(Rect.intersects(maklo,blockcontainer.getcolshape())){
+                if(Rect.intersects(Tap,blockcontainer.getcolshape())){
                     for (Bubbl bubbl : bubble){
-                        if(Rect.intersects(maklo,bubbl.getcolshape())){
+                        if(Rect.intersects(Tap,bubbl.getcolshape())){
                             bubbl.x = -500;
                             bubbl.gettap = true;
                             if(bubbl.isBubstat()){
                                 SCORE--;
                                 soundPool.play(soundblockarea,1,1,0,0,1);
                             }else{
-                                SCORE=SCORE-4;
+                                SCORE=SCORE-3;
                                 soundPool.play(soundblockarea,1,1,0,0,1);
                             }
 
@@ -388,7 +391,7 @@ public class GameView extends SurfaceView implements Runnable {
                     }
                     break;
                 }else{
-                    if(Rect.intersects(maklo,bonuscontainer.getcolshape())){
+                    if(Rect.intersects(Tap,bonuscontainer.getcolshape())){
                         bonuscontainer.x = -500;
                         bonuscontainer.setGettap(true);
                         if(bonuscontainer.lucknum == 1){
@@ -403,7 +406,7 @@ public class GameView extends SurfaceView implements Runnable {
                         }
                     }
                     for (Bubbl bubbl : bubble){
-                        if(Rect.intersects(maklo,bubbl.getcolshape())){
+                        if(Rect.intersects(Tap,bubbl.getcolshape())){
                             bubbl.x = -500;
                             bubbl.gettap = true;
                             if(bubbl.isBubstat()){
