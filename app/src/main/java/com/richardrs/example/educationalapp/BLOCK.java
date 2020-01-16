@@ -23,7 +23,7 @@ public class BLOCK implements EventListener {
 
     BLOCK(Resources res){
         blockarea = BitmapFactory.decodeResource(res,R.drawable.bublee);
-        blockarea = Bitmap.createScaledBitmap(blockarea,150,1080,false);
+        blockarea = Bitmap.createScaledBitmap(blockarea,350,1080,false);
 
 
     }
@@ -32,7 +32,7 @@ public class BLOCK implements EventListener {
     }
 
     Rect getcolshape(){
-        return new Rect(x,y,x+300,2000);
+        return new Rect(x,y,x+450,2000);
     }
 
     public void setX(int x) {

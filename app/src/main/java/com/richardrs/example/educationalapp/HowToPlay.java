@@ -1,6 +1,7 @@
 package com.richardrs.example.educationalapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -24,10 +25,11 @@ public class HowToPlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to_play);
 
-        GifImageView animations = (GifImageView)findViewById(R.id.gifto);
-        ImageButton SFx = (ImageButton)findViewById(R.id.sfx);
+        final GifImageView animations = (GifImageView)findViewById(R.id.gifto);
+        final ImageButton SFx = (ImageButton)findViewById(R.id.sfx);
         final TextView Text = (TextView)findViewById(R.id.texto);
-        ImageButton Next = (ImageButton)findViewById(R.id.nexto);
+        final ImageButton Next = (ImageButton)findViewById(R.id.nexto);
+        ConstraintLayout bg = (ConstraintLayout)findViewById(R.id.bg);
 
         final String[] Guides = {
                 "Tap On The Right Question inside the Bubble and you get 1 Point",
@@ -54,8 +56,12 @@ public class HowToPlay extends AppCompatActivity {
         soundblockarea = soundPool.load(this,R.raw.puff,3);
         soundblockmove = soundPool.load(this,R.raw.poison,3);
 
+        bg.getBackground().setAlpha(150);
+
         Text.setText(Guides[0]);
         Scontainer = sound1;
+        SFx.performClick();
+        animations.setImageResource(R.drawable.howto1);
 
         Next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,28 +69,39 @@ public class HowToPlay extends AppCompatActivity {
                 pages++;
                 if(pages == 1){
                     Scontainer = soundend;
+                    animations.setImageResource(R.drawable.howto3);
                 }else if(pages == 2){
                     Scontainer = sound2;
+                    animations.setImageResource(R.drawable.howto2);
                 }else if(pages == 3){
+                    animations.setImageResource(R.drawable.howto4);
                     Scontainer = sound1;
                 }else if(pages == 4){
+                    animations.setImageResource(R.drawable.howto5);
                     Scontainer = soundbon2;
                 }else if(pages == 5){
+                    animations.setImageResource(R.drawable.howto6);
                     Scontainer = soundbon3;
                 }else if(pages == 6){
+                    animations.setImageResource(R.drawable.howto7);
                     Scontainer = soundbon1;
                 }else if(pages == 7){
+                    animations.setImageResource(R.drawable.howto8);
                     Scontainer = soundblockmove;
                 }else if(pages == 8){
+                    animations.setImageResource(R.drawable.howto9);
                     Scontainer = soundblockarea;
                 }else if(pages == 9){
+                    animations.setImageResource(R.drawable.howto0);
                     Scontainer= sound;
+                    Next.setImageResource(R.drawable.ok);
                 }else{
                     finish();
                 }
                 if(pages < 10){
                     Text.setText(Guides[pages]);
                 }
+                SFx.performClick();
             }
         });
 
@@ -94,6 +111,7 @@ public class HowToPlay extends AppCompatActivity {
                 soundPool.play(Scontainer,100,100,0,0,1);
             }
         });
+
 
     }
 

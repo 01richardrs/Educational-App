@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/transparent"
     android:theme="@style/Theme.AppCompat.Translucent"
+    android:id="@+id/bg"
     tools:context=".HowToPlay">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:background="#FF00FF"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:background="@drawable/but_box_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,7 +26,6 @@
             android:text="How To Play"
             android:textColor="#000"
             android:textSize="25dp"
-
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +46,7 @@
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/gifto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="125dp"
                 android:src="@drawable/logos" />
 
             <LinearLayout
@@ -68,7 +69,7 @@
                     android:layout_marginRight="30dp"
                     android:background="@drawable/circ_button"
                     android:padding="3dp"
-                    android:src="@drawable/qmark" />
+                    android:src="@drawable/voicew" />
 
             </LinearLayout>
 
@@ -96,8 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/circ_button"
-            android:padding="3dp"
-            android:src="@drawable/voice"
+            android:padding="5dp"
+            android:src="@drawable/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.94"
