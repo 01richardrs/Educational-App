@@ -8,17 +8,13 @@ import java.util.EventListener;
 
 public class BLOCK implements EventListener {
 
-    public boolean gettap = true;
     int x=0,y;
     Bitmap blockarea;
 
-//    int bubblecount = 1;
 
     BLOCK(Resources res){
         blockarea = BitmapFactory.decodeResource(res,R.drawable.bublee);
         blockarea = Bitmap.createScaledBitmap(blockarea,350,1080,false);
-
-
     }
     Bitmap getBlockarea(){
         return blockarea;

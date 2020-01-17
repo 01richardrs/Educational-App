@@ -26,7 +26,7 @@ public class GameOver extends AppCompatActivity {
         Bounce interpolator = new Bounce(0.2, 20);
         bonce.setInterpolator(interpolator);
 
-        ConstraintLayout maklo = (ConstraintLayout) findViewById(R.id.croslau);
+        ConstraintLayout ConsLayout = (ConstraintLayout) findViewById(R.id.croslau);
         final Button back = (Button)findViewById(R.id.backo);
         final Button leaderboard = (Button)findViewById(R.id.Leaderboard);
         final Button playagain = (Button)findViewById(R.id.plei);
@@ -34,7 +34,7 @@ public class GameOver extends AppCompatActivity {
         TextView current_score = (TextView)findViewById(R.id.Current);
         TextView HIGHEST_score = (TextView)findViewById(R.id.HIGH);
 
-        maklo.getBackground().setAlpha(150);
+        ConsLayout.getBackground().setAlpha(150);
 
         back.startAnimation(bonce);
         leaderboard.startAnimation(bonce);
@@ -43,14 +43,8 @@ public class GameOver extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Pref",MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-
         int Score = preferences.getInt("SCORE",0);
         String PlayerName = preferences.getString("Player_name","Player 1");
-
-
-        System.out.println(Score);
-
-
         current_score.setText(""+Score);
 
         db = new SimpleDatabase(this);
@@ -70,10 +64,7 @@ public class GameOver extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 back.startAnimation(bonce);
                 GameAct.fa.finish();
-//                MainActivity.fa.finish();
                 finish();
-//                Intent maklo = new Intent(GameOver.this, MainActivity.class);
-//                startActivity(maklo);
             }
         });
 
@@ -97,7 +88,6 @@ public class GameOver extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 playagain.startAnimation(bonce);
                 GameAct.fa.finish();
-//                MainActivity.fa.finish();
                 Intent Plays = new Intent(GameOver.this,GameAct.class);
                 startActivity(Plays);
             }
@@ -106,10 +96,7 @@ public class GameOver extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        MainActivity.fa.finish();
         finish();
-//        Intent maklo = new Intent(GameOver.this, MainActivity.class);
-//        startActivity(maklo);
     }
 
 }

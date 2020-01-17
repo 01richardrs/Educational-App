@@ -32,7 +32,6 @@ public class Settings extends AppCompatActivity {
         Button Pname_apply = (Button)findViewById(R.id.PnameApply);
         final RadioGroup Choice = (RadioGroup)findViewById(R.id.buble_choice);
         Button Choice_apply = (Button)findViewById(R.id.Choice_apply);
-
         final Animation bonce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         SharedPreferences preferences = getSharedPreferences("Pref", MODE_PRIVATE);
@@ -69,15 +68,11 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(BG_voice[0]){
-//                    Intent maklo =  new Intent(Settings.this,MusicService.class);
-//                    stopService(maklo);
                     BG_voice[0] =false;
                     Bg_voice.setImageResource(R.drawable.voiceoff);
                     Toast.makeText(Settings.this, "Background voice is Muted.",
                             Toast.LENGTH_SHORT).show();
                 }else{
-//                    mediaPlayer.setLooping(true);
-//                    mediaPlayer.start();
                     BG_voice[0] =true;
                     Bg_voice.setImageResource(R.drawable.voice);
                     Toast.makeText(Settings.this, "Background voice is On.",
@@ -178,7 +173,6 @@ public class Settings extends AppCompatActivity {
             normalBub.setChecked(true);
         }
 
-        System.out.println(choice);
 
         Choice_apply.setOnClickListener(new View.OnClickListener() {
             @Override

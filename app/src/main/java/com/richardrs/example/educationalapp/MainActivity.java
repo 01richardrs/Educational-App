@@ -52,12 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.whitelady);
 
-
         SharedPreferences preferences = getSharedPreferences("Pref", MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();
 
-         final boolean BG_SOUND = preferences.getBoolean("BG_VOICE", true);
-         final boolean[] current = {BG_SOUND};
+        final boolean BG_VOICE = preferences.getBoolean("BG_VOICE", true);
+        final boolean[] current = {BG_VOICE};
+
+        final int BG_SOUND = preferences.getInt("BG_SOUND",100);
+        mediaPlayer.setVolume(BG_SOUND,BG_SOUND);
 
         if (current[0]){
             Voise.setImageResource(R.drawable.voicew);
@@ -99,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 Share.startAnimation(bonce);
                 Intent shares = new Intent(android.content.Intent.ACTION_SEND);
                 shares.setType("text/plain");
-                String shareBody = "Download GAME NAME for freee noww CLICK HERE : ";
-                shares.putExtra(android.content.Intent.EXTRA_SUBJECT, "GAME NAME");
+                String shareBody = "Download Math POP! for free now!!! , COPY HERE : "+"https://drive.google.com/file/d/1zSYyBjWiTAjgoWuo1FEkE5_t8u5hd5CN/view?usp=sharing";
+                shares.putExtra(android.content.Intent.EXTRA_SUBJECT, "Math POP!");
                 shares.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(shares, "Share via"));
             }
@@ -141,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     Voise.setImageResource(R.drawable.voicew);
                     current[0] = true;
                     mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.whitelady);
+                    mediaPlayer.setVolume(BG_SOUND,BG_SOUND);
                     mediaPlayer.setLooping(true);
                     mediaPlayer.start();
                 }
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(R.string.app_name);
-        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setIcon(R.drawable.logo);
         builder.setMessage("Do you want to exit?")
                 .setCancelable(true)
                 .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
@@ -192,8 +195,6 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
 
     }
-
-
     @Override
     public void onTrimMemory(int level) {
         if (level == ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
@@ -207,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         mediaPlayer.stop();
     }
-
     @Override
     protected void onResume() {
         super.onResume();

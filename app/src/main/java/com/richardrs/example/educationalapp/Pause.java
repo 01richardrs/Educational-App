@@ -23,7 +23,6 @@ public class Pause extends AppCompatActivity {
 
         background.getBackground().setAlpha(150);
 
-
         final Animation bonce = AnimationUtils.loadAnimation(this, R.anim.bounce);
         Bounce interpolator = new Bounce(0.2, 20);
         bonce.setInterpolator(interpolator);
@@ -38,9 +37,7 @@ public class Pause extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 Back.startAnimation(bonce);
                 GameAct.fa.finish();
-//                MainActivity.fa.finish();
                 finish();
-//                startActivity(new Intent(Pause.this,MainActivity.class));
             }
         });
 
@@ -51,7 +48,6 @@ public class Pause extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 Contine.startAnimation(bonce);
                 finish();
-//                startActivity(new Intent(Pause.this,GameAct.class));
             }
         });
 

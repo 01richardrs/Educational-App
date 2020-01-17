@@ -4,7 +4,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-
 import java.util.EventListener;
 
 import static com.richardrs.example.educationalapp.GameView.screenratX;
@@ -20,7 +19,7 @@ public class Bubbl implements EventListener {
     String text;
     boolean bubstat = true;
 
-//    int bubblecount = 1;
+//    int bubblecount = 1; //for animation
 
     Bubbl(Resources res){
 
