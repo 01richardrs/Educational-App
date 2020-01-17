@@ -50,7 +50,7 @@ public class GameOver extends AppCompatActivity {
 
 
         int Score = preferences.getInt("SCORE",0);
-
+        String PlayerName = preferences.getString("Player_name","Player 1");
 
 
         System.out.println(Score);
@@ -59,7 +59,7 @@ public class GameOver extends AppCompatActivity {
         current_score.setText(""+Score);
 
         db = new SimpleDatabase(this);
-        db.addScore(Score);
+        db.addScore(PlayerName,Score);
         db.close();
 
         back.setOnClickListener(new View.OnClickListener() {

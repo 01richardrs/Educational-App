@@ -28,22 +28,31 @@ public class Leaderboard extends AppCompatActivity {
         db = new SimpleDatabase(this);
 
         ArrayList<Integer> myArray;
+        ArrayList<String> myName;
         ArrayList<String> ranking = new ArrayList<>();
         myArray = db.getAllScores();
+        myName = db.getNameasWell();
 
         //Sorting it
         Collections.sort(myArray, Collections.reverseOrder());
+        Collections.sort(myName, Collections.reverseOrder());
 
-        //Putting up the score into the leaderboards with the maximum of 10 score
         int enumerator = 1;
-        if(myArray.size()<10) {
-            for (int points : myArray) {
-                ranking.add(String.format(Locale.getDefault(), "%1$2s.  %2$3s ", Integer.toString(enumerator), Integer.toString(points)));
-                enumerator++;
+        if(myArray.size()<5) {
+            if(myArray.size()==0){
+                ranking.add("No Highscore yet!");
+            }else{
+                int count = 0;
+                for (int points : myArray) {
+                    ranking.add(String.format(Locale.getDefault(), "%1$2s.  %2$3s ", Integer.toString(enumerator),myName.get(count)+" : "+ Integer.toString(points)));
+                    enumerator++;
+                    count++;
+                }
+                count = 0;
             }
         } else {
-            for(int x = 0 ; x<10 ; x++){
-                ranking.add(String.format(Locale.getDefault(), "%1$2s.  %2$3s ", Integer.toString(enumerator), Integer.toString(myArray.get(x))));
+            for(int x = 0 ; x<5 ; x++){
+                ranking.add(String.format(Locale.getDefault(), "%1$2s.  %2$3s ", Integer.toString(enumerator),myName.get(x)+" : "+ Integer.toString(myArray.get(x))));
                 enumerator++;
             }
         }

@@ -135,9 +135,9 @@ public class GameView extends SurfaceView implements Runnable {
         sound2 = soundPool.load(context, R.raw.wrong, 2);
         soundbon1 = soundPool.load(context,R.raw.bum,0);
         soundbon2 = soundPool.load(context,R.raw.up,0);
-        soundbon3 = soundPool.load(context,R.raw.down,0);
+        soundbon3 = soundPool.load(context,R.raw.down,1);
         soundblockarea = soundPool.load(context,R.raw.puff,3);
-        soundEnd = soundPool.load(context,R.raw.over,1);
+        soundEnd = soundPool.load(context,R.raw.over,2);
 
         this.ScreenX = ScreenX;
         this.ScreenY = ScreenY;

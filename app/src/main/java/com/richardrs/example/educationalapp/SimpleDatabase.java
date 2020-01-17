@@ -15,6 +15,7 @@ public class SimpleDatabase extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "ScoreList";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_SCORE ="score";
+    private static final String COLUMN_NAME = "name";
 
 
     SimpleDatabase(Context context) {
@@ -23,9 +24,10 @@ public class SimpleDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " +TABLE_NAME
-                +"(" +COLUMN_ID+
-                " INTEGER PRIMARY KEY AUTOINCREMENT, " +COLUMN_SCORE+
-                " VARCHAR);";
+                +"(" +
+                COLUMN_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_SCORE+ " VARCHAR, "+
+                COLUMN_NAME+" TEXT);";
         db.execSQL(sql);
     }
 
@@ -36,12 +38,13 @@ public class SimpleDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    boolean addScore(int score){
+    boolean addScore(String name, int score){
         //Adding a score into the database
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(COLUMN_SCORE,score);
+        contentValues.put(COLUMN_NAME,name);
 
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
@@ -83,4 +86,24 @@ public class SimpleDatabase extends SQLiteOpenHelper {
         cursor.close();
         return scoreList;
     }
+    ArrayList<String> getNameasWell() {
+        //Getting all the score
+        ArrayList<String> Name = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Name.add(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return Name;
+    }
+
+
 }
