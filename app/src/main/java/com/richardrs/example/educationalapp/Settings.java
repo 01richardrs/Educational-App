@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 public class Settings extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +69,15 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(BG_voice[0]){
+//                    Intent maklo =  new Intent(Settings.this,MusicService.class);
+//                    stopService(maklo);
                     BG_voice[0] =false;
                     Bg_voice.setImageResource(R.drawable.voiceoff);
                     Toast.makeText(Settings.this, "Background voice is Muted.",
                             Toast.LENGTH_SHORT).show();
                 }else{
+//                    mediaPlayer.setLooping(true);
+//                    mediaPlayer.start();
                     BG_voice[0] =true;
                     Bg_voice.setImageResource(R.drawable.voice);
                     Toast.makeText(Settings.this, "Background voice is On.",
@@ -198,4 +201,5 @@ public class Settings extends AppCompatActivity {
         Toast.makeText(Settings.this, "Player Name and Style are not saved.",
                 Toast.LENGTH_SHORT).show();
     }
+
 }

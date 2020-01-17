@@ -98,17 +98,11 @@ public class GameView extends SurfaceView implements Runnable {
     Rect Tap;
     private Bubbl[] bubble;
     private Bonus bonuscontainer;
-
     private BLOCK block =  new BLOCK(getResources());
     private BLOCK blockcontainer;
-
     private Random random;
     Runnable runnable;
     private int posX = 200;
-
-    //Games Rules
-    // LET THE FALSE BUB PASS GET SCORE IF HIT FALSE BUB - SCORE
-    // HIT EVERY RIGHT BUB IF RIGHT ONE PASS U DED
 
 
 
@@ -155,6 +149,7 @@ public class GameView extends SurfaceView implements Runnable {
         Bonus haha = new Bonus(getResources());
         bonuscontainer = haha;
         blockcontainer = block;
+
 
 
         for (int i = 0;i < 5;i++) {
@@ -275,6 +270,7 @@ public class GameView extends SurfaceView implements Runnable {
     private void draw() {
         SharedPreferences preferences =
                 getContext().getSharedPreferences("Pref",MODE_PRIVATE);
+        boolean SFX_VOICE = preferences.getBoolean("SFX_VOICE",true);
 
         int Choice=1;
 
@@ -347,12 +343,16 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
 
             if(gameover){
-                soundPool.play(soundEnd,1,1,0,0,1);
+                if(SFX_VOICE){
+                    soundPool.play(soundEnd,1,1,0,0,1);
+                }else{
+
+                }
                 SharedPreferences.Editor editor = preferences.edit();
 
                 isplay = false;
                 getHolder().unlockCanvasAndPost(canvas);
-                MainActivity.fa.finish();
+//                MainActivity.fa.finish();
 
                 System.out.println(SCORE);
 
@@ -396,6 +396,9 @@ public class GameView extends SurfaceView implements Runnable {
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        SharedPreferences preferences = getContext().getSharedPreferences("Pref", MODE_PRIVATE);
+        boolean SFX_VOICE = preferences.getBoolean("SFX_VOICE",true);
+
         float x = event.getX();
         float y = event.getY();
         switch(event.getAction())
@@ -403,8 +406,9 @@ public class GameView extends SurfaceView implements Runnable {
             case MotionEvent.ACTION_DOWN:
 
                 Tap = new Rect((int)x+100,(int)y+100,(int)x,(int)y);
-                soundPool.play(sound,1,1,0,0,1);
-
+                if(SFX_VOICE){
+                    soundPool.play(sound,1,1,0,0,1);
+                }
                 if(Rect.intersects(Tap,blockcontainer.getcolshape())){
                     for (Bubbl bubbl : bubble){
                         if(Rect.intersects(Tap,bubbl.getcolshape())){
@@ -412,10 +416,14 @@ public class GameView extends SurfaceView implements Runnable {
                             bubbl.gettap = true;
                             if(bubbl.isBubstat()){
                                 SCORE--;
-                                soundPool.play(soundblockarea,1,1,0,0,1);
+                                if(SFX_VOICE){
+                                    soundPool.play(soundblockarea,1,1,0,0,1);
+                                }
                             }else{
                                 SCORE=SCORE-3;
-                                soundPool.play(soundblockarea,1,1,0,0,1);
+                                if(SFX_VOICE){
+                                    soundPool.play(soundblockarea,1,1,0,0,1);
+                                }
                             }
 
                         }
@@ -426,13 +434,19 @@ public class GameView extends SurfaceView implements Runnable {
                         bonuscontainer.x = -500;
                         bonuscontainer.setGettap(true);
                         if(bonuscontainer.lucknum == 1){
-                            soundPool.play(soundbon1,1,1,0,0,1);
+                            if(SFX_VOICE){
+                                soundPool.play(soundbon1,1,1,0,0,1);
+                            }
                             gameover = true;
                         }else if(bonuscontainer.lucknum == 2){
-                            soundPool.play(soundbon2,1,1,0,0,1);
+                            if(SFX_VOICE){
+                                soundPool.play(soundbon2,1,1,0,0,1);
+                            }
                             SCORE= SCORE +5;
                         }else{
-                            soundPool.play(soundbon3,1,1,0,0,1);
+                            if(SFX_VOICE){
+                                soundPool.play(soundbon3,1,1,0,0,1);
+                            }
                             SCORE= SCORE -5;
                         }
                     }
@@ -442,10 +456,14 @@ public class GameView extends SurfaceView implements Runnable {
                             bubbl.gettap = true;
                             if(bubbl.isBubstat()){
                                 SCORE++;
-                                soundPool.play(sound1,1,1,0,0,1);
+                                if(SFX_VOICE){
+                                    soundPool.play(sound1,1,1,0,0,1);
+                                }
                             }else{
                                 SCORE=SCORE-2;
-                                soundPool.play(sound2,1,1,0,0,1);
+                                if(SFX_VOICE){
+                                    soundPool.play(sound2,1,1,0,0,1);
+                                }
                             }
 
                         }

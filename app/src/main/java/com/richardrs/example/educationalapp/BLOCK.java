@@ -4,14 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-import android.view.MotionEvent;
-import android.view.View;
-
 import java.util.EventListener;
-
-import static com.richardrs.example.educationalapp.GameView.screenratX;
-import static com.richardrs.example.educationalapp.GameView.screenratY;
-
 
 public class BLOCK implements EventListener {
 

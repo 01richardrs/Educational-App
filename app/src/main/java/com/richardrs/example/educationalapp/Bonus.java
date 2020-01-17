@@ -4,9 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-
 import java.util.EventListener;
-
 import static com.richardrs.example.educationalapp.GameView.screenratX;
 import static com.richardrs.example.educationalapp.GameView.screenratY;
 

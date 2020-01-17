@@ -1,22 +1,17 @@
 package com.richardrs.example.educationalapp;
 
-import androidx.annotation.MainThread;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class GameOver extends AppCompatActivity {
@@ -55,12 +50,18 @@ public class GameOver extends AppCompatActivity {
 
         System.out.println(Score);
 
-        HIGHEST_score.setText(""+0);
+
         current_score.setText(""+Score);
 
         db = new SimpleDatabase(this);
         db.addScore(PlayerName,Score);
         db.close();
+
+        ArrayList<Integer> myArray;
+        myArray = db.getAllScores();
+        Collections.sort(myArray, Collections.reverseOrder());
+
+        HIGHEST_score.setText(""+myArray.get(0));
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +70,10 @@ public class GameOver extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 back.startAnimation(bonce);
                 GameAct.fa.finish();
-                MainActivity.fa.finish();
+//                MainActivity.fa.finish();
                 finish();
-                Intent maklo = new Intent(GameOver.this, MainActivity.class);
-                startActivity(maklo);
+//                Intent maklo = new Intent(GameOver.this, MainActivity.class);
+//                startActivity(maklo);
             }
         });
 
@@ -96,7 +97,7 @@ public class GameOver extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 playagain.startAnimation(bonce);
                 GameAct.fa.finish();
-                MainActivity.fa.finish();
+//                MainActivity.fa.finish();
                 Intent Plays = new Intent(GameOver.this,GameAct.class);
                 startActivity(Plays);
             }
@@ -105,10 +106,10 @@ public class GameOver extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        MainActivity.fa.finish();
+//        MainActivity.fa.finish();
         finish();
-        Intent maklo = new Intent(GameOver.this, MainActivity.class);
-        startActivity(maklo);
+//        Intent maklo = new Intent(GameOver.this, MainActivity.class);
+//        startActivity(maklo);
     }
 
 }

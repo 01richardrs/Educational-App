@@ -1,12 +1,9 @@
 package com.richardrs.example.educationalapp;
 
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-import android.view.MotionEvent;
-import android.view.View;
 
 import java.util.EventListener;
 

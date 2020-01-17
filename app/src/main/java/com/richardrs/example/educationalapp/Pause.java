@@ -3,15 +3,12 @@ package com.richardrs.example.educationalapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-
-import dalvik.system.BaseDexClassLoader;
 
 public class Pause extends AppCompatActivity {
 
@@ -41,9 +38,9 @@ public class Pause extends AppCompatActivity {
                 bonce.setInterpolator(interpolator);
                 Back.startAnimation(bonce);
                 GameAct.fa.finish();
-                MainActivity.fa.finish();
+//                MainActivity.fa.finish();
                 finish();
-                startActivity(new Intent(Pause.this,MainActivity.class));
+//                startActivity(new Intent(Pause.this,MainActivity.class));
             }
         });
 

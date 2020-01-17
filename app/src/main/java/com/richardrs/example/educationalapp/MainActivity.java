@@ -2,29 +2,21 @@ package com.richardrs.example.educationalapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
+import android.content.ComponentCallbacks2;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private static MediaPlayer mediaPlayer;
@@ -59,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         Settg.startAnimation(bonce);
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.whitelady);
+
+
         SharedPreferences preferences = getSharedPreferences("Pref", MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();
 
@@ -71,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.start();
         }else {
             Voise.setImageResource(R.drawable.voiceoffw);
-            mediaPlayer.stop();
+            mediaPlayer.pause();
         }
 
         Play.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 if(current[0]){
                     Voise.setImageResource(R.drawable.voiceoffw);
                     current[0] = false;
-                    mediaPlayer.stop();
+                    mediaPlayer.pause();
                 }else{
                     Voise.setImageResource(R.drawable.voicew);
                     current[0] = true;
@@ -199,18 +193,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
-    protected void onPause() {
-        super.onPause();
-        mediaPlayer.pause();
+    public void onTrimMemory(int level) {
+        if (level == ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
+            if(mediaPlayer != null){
+                mediaPlayer.pause();
+            }
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.stop();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mediaPlayer.start();
+        SharedPreferences preferences = getSharedPreferences("Pref", MODE_PRIVATE);
+        final boolean BG_SOUND = preferences.getBoolean("BG_VOICE", true);
+        if(BG_SOUND){
+            mediaPlayer.start();
+        }
     }
-
 
 }
 
+//There is still an issue about the order for the leaderboard score more than 5 plays
+// ANother issue in the audio background..
