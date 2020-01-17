@@ -32,9 +32,9 @@ public class GameOver extends AppCompatActivity {
         bonce.setInterpolator(interpolator);
 
         ConstraintLayout maklo = (ConstraintLayout) findViewById(R.id.croslau);
-        Button back = (Button)findViewById(R.id.backo);
-        Button leaderboard = (Button)findViewById(R.id.Leaderboard);
-        Button playagain = (Button)findViewById(R.id.plei);
+        final Button back = (Button)findViewById(R.id.backo);
+        final Button leaderboard = (Button)findViewById(R.id.Leaderboard);
+        final Button playagain = (Button)findViewById(R.id.plei);
 
         TextView current_score = (TextView)findViewById(R.id.Current);
         TextView HIGHEST_score = (TextView)findViewById(R.id.HIGH);
@@ -48,11 +48,14 @@ public class GameOver extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Pref",MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
+
         int Score = preferences.getInt("SCORE",0);
+
+
 
         System.out.println(Score);
 
-        HIGHEST_score.setText(""+Score);
+        HIGHEST_score.setText(""+0);
         current_score.setText(""+Score);
 
         db = new SimpleDatabase(this);
@@ -62,6 +65,9 @@ public class GameOver extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                back.startAnimation(bonce);
                 GameAct.fa.finish();
                 MainActivity.fa.finish();
                 finish();
@@ -73,6 +79,9 @@ public class GameOver extends AppCompatActivity {
         leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                leaderboard.startAnimation(bonce);
                 GameAct.fa.finish();
                 finish();
                 Intent maklo = new Intent(GameOver.this, Leaderboard.class);
@@ -83,6 +92,9 @@ public class GameOver extends AppCompatActivity {
         playagain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                playagain.startAnimation(bonce);
                 GameAct.fa.finish();
                 MainActivity.fa.finish();
                 Intent Plays = new Intent(GameOver.this,GameAct.class);

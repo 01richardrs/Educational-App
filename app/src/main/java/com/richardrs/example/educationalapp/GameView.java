@@ -30,7 +30,7 @@ public class GameView extends SurfaceView implements Runnable {
     public static float screenratX,screenratY;
     private Paint paint;
     private SoundPool soundPool;
-    private int sound,sound1,sound2,soundbon1,soundbon2,soundbon3,soundblockarea;
+    private int sound,sound1,sound2,soundbon1,soundbon2,soundbon3,soundblockarea,soundEnd;
     private Background background1,background2;
     public int SCORE = 0;
 
@@ -97,7 +97,6 @@ public class GameView extends SurfaceView implements Runnable {
 
     Rect Tap;
     private Bubbl[] bubble;
-    private Bonus bonus = new Bonus(getResources());
     private Bonus bonuscontainer;
 
     private BLOCK block =  new BLOCK(getResources());
@@ -134,10 +133,11 @@ public class GameView extends SurfaceView implements Runnable {
         sound = soundPool.load(context, R.raw.shooty, 1);
         sound1 = soundPool.load(context, R.raw.gud, 2);
         sound2 = soundPool.load(context, R.raw.wrong, 2);
-        soundbon1 = soundPool.load(context,R.raw.bum,2);
-        soundbon2 = soundPool.load(context,R.raw.up,2);
-        soundbon3 = soundPool.load(context,R.raw.down,2);
+        soundbon1 = soundPool.load(context,R.raw.bum,0);
+        soundbon2 = soundPool.load(context,R.raw.up,0);
+        soundbon3 = soundPool.load(context,R.raw.down,0);
         soundblockarea = soundPool.load(context,R.raw.puff,3);
+        soundEnd = soundPool.load(context,R.raw.over,1);
 
         this.ScreenX = ScreenX;
         this.ScreenY = ScreenY;
@@ -152,7 +152,8 @@ public class GameView extends SurfaceView implements Runnable {
         paint = new Paint();
 
         bubble = new Bubbl[5];//array depend on how much pic need for animation
-        bonuscontainer = bonus;
+        Bonus haha = new Bonus(getResources());
+        bonuscontainer = haha;
         blockcontainer = block;
 
 
@@ -346,6 +347,7 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
 
             if(gameover){
+                soundPool.play(soundEnd,1,1,0,0,1);
                 SharedPreferences.Editor editor = preferences.edit();
 
                 isplay = false;

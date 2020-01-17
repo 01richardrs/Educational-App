@@ -29,8 +29,8 @@ public class Bonus implements EventListener {
         width = bonus1.getWidth();
         height = bonus1.getHeight();
 
-        width /= 5;
-        height /= 5;
+        width /= 9;
+        height /= 9;
 
         width += (int) (width * screenratX);
         height += (int) (height* screenratY);
@@ -57,10 +57,6 @@ public class Bonus implements EventListener {
 
     Rect getcolshape(){
         return new Rect(x,y,x+width+50,y+height+70);
-    }
-
-    public int getLucknum() {
-        return lucknum;
     }
 
     public void setLucknum(int lucknum) {
