@@ -191,4 +191,11 @@ public class Settings extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(Settings.this, "Player Name and Style are not saved.",
+                Toast.LENGTH_SHORT).show();
+    }
 }
