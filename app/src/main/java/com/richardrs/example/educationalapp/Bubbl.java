@@ -1,5 +1,6 @@
 package com.richardrs.example.educationalapp;
 
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +19,7 @@ public class Bubbl implements EventListener {
     public int speed = 20;
     public boolean gettap = true;
     int x=0,y , width,height;
-    Bitmap bubbl1;
+    Bitmap bubbl1,bubbl2,bubbl3,bubbl4;
     String text;
     boolean bubstat = true;
 
@@ -27,6 +28,9 @@ public class Bubbl implements EventListener {
     Bubbl(Resources res){
 
         bubbl1 = BitmapFactory.decodeResource(res, R.drawable.buburu);
+        bubbl2 = BitmapFactory.decodeResource(res, R.drawable.buburu2);
+        bubbl3 = BitmapFactory.decodeResource(res, R.drawable.buburu3);
+        bubbl4 = BitmapFactory.decodeResource(res, R.drawable.buburu4);
 
         width = bubbl1.getWidth();
         height = bubbl1.getHeight();
@@ -38,6 +42,9 @@ public class Bubbl implements EventListener {
         height += (int) (height* screenratY);
 
         bubbl1 = Bitmap.createScaledBitmap(bubbl1,width,height,false);
+        bubbl2 = Bitmap.createScaledBitmap(bubbl2,width,height,false);
+        bubbl3 = Bitmap.createScaledBitmap(bubbl3,width,height,false);
+        bubbl4 = Bitmap.createScaledBitmap(bubbl4,width,height,false);
 
         y= -height;
 
@@ -62,6 +69,18 @@ public class Bubbl implements EventListener {
         //animation purpose
 
         return bubbl1;
+    }
+
+    public Bitmap getBubbl2() {
+        return bubbl2;
+    }
+
+    public Bitmap getBubbl3() {
+        return bubbl3;
+    }
+
+    public Bitmap getBubbl4() {
+        return bubbl4;
     }
 
     Rect getcolshape(){

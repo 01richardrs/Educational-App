@@ -116,8 +116,6 @@ public class GameView extends SurfaceView implements Runnable {
     public GameView(Context context, int ScreenX,int ScreenY) {
         super(context);
 
-        SharedPreferences preferences = context.getSharedPreferences("Pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -274,8 +272,14 @@ public class GameView extends SurfaceView implements Runnable {
     }
     }
     private void draw() {
+        SharedPreferences preferences =
+                getContext().getSharedPreferences("Pref",MODE_PRIVATE);
+
+        int Choice=1;
 
         if(getHolder().getSurface().isValid()){
+
+            Choice = preferences.getInt("CHOICE",0);
 
             final Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background,background1.x,background1.y,paint);
@@ -300,13 +304,40 @@ public class GameView extends SurfaceView implements Runnable {
             }
 
             for (Bubbl bubbl : bubble){
+                if(Choice == 0){
+                    canvas.drawBitmap(bubbl.getBubbl1(), bubbl.x, bubbl.y, paint);
+                    paint.setColor(Color.BLACK); // for check buble hit range
+                    paint.setTextAlign(Paint.Align.CENTER);
+                    paint.setTextSize(50);
+                    canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+150,paint);
+                }else if(Choice == 1){
+                    canvas.drawBitmap(bubbl.getBubbl2(), bubbl.x, bubbl.y, paint);
+                    paint.setColor(Color.BLACK); // for check buble hit range
+                    paint.setTextAlign(Paint.Align.CENTER);
+                    paint.setTextSize(50);
+                    canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+150,paint);
+                }else if(Choice == 2){
+                    canvas.drawBitmap(bubbl.getBubbl3(), bubbl.x, bubbl.y, paint);
+                    paint.setColor(Color.WHITE); // for check buble hit range
+                    paint.setTextAlign(Paint.Align.CENTER);
+                    paint.setTextSize(50);
+                    canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+150,paint);
+                }else if(Choice == 3){
+                    canvas.drawBitmap(bubbl.getBubbl4(), bubbl.x, bubbl.y, paint);
+                    paint.setColor(Color.BLACK); // for check buble hit range
+                    paint.setTextAlign(Paint.Align.CENTER);
+                    paint.setTextSize(50);
+                    canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+120,paint);
+                }else{
+                    canvas.drawBitmap(bubbl.getBubbl1(), bubbl.x, bubbl.y, paint);
+                    paint.setColor(Color.BLACK); // for check buble hit range
+                    paint.setTextAlign(Paint.Align.CENTER);
+                    paint.setTextSize(50);
+                    canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+150,paint);
+                }
 
 //                System.out.println("x"+bubbl.x +" y "+bubbl.y); //for check coordinate
-                canvas.drawBitmap(bubbl.getBubbl1(), bubbl.x, bubbl.y, paint);
-                paint.setColor(Color.BLACK); // for check buble hit range
-                paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(50);
-                canvas.drawText(""+bubbl.text,bubbl.x+100,bubbl.y+150,paint);
+
             }
 //            if(Tap != null){ //debugmode to see user hit
 //              paint.setColor(Color.BLUE);
@@ -315,8 +346,6 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawText("SCORE : "+SCORE,ScreenX/2,100,paint);
 
             if(gameover){
-                SharedPreferences preferences =
-                        getContext().getSharedPreferences("Pref",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
 
                 isplay = false;
