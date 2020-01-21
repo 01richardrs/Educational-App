@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         final Button Exit = (Button)findViewById(R.id.Exit_but);
         final Button Play = (Button)findViewById(R.id.Play);
         final Button LBoard = (Button)findViewById(R.id.Leaderboard);
+        final Button Difficulties = (Button)findViewById(R.id.Difficulties);
         final ImageButton Share = (ImageButton)findViewById(R.id.share);
         final ImageButton Settg = (ImageButton)findViewById(R.id.setting);
         final ImageButton Voise = (ImageButton)findViewById(R.id.voise);
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         LBoard.startAnimation(bonce);
         Share.startAnimation(bonce);
         Settg.startAnimation(bonce);
+        Difficulties.startAnimation(bonce);
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.whitelady);
 
@@ -163,7 +165,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        Difficulties.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bounce interpolator = new Bounce(0.3, 25);
+                bonce.setInterpolator(interpolator);
+                Difficulties.startAnimation(bonce);
+                Intent diff = new Intent(MainActivity.this,Difficulties.class);
+                startActivity(diff);
+            }
+        });
+
     }
+
 
     @Override
     public void onBackPressed() {

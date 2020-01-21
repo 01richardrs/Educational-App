@@ -175,6 +175,11 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
     public void update() {
+        SharedPreferences preferences =
+                getContext().getSharedPreferences("Pref",MODE_PRIVATE);
+        int difficulties = preferences.getInt("DIFFICULTIES",1);
+        int minSpeed= 4;
+
 
         blockcontainer.x = posX;
         blockcontainer.setX(posX);
@@ -189,6 +194,20 @@ public class GameView extends SurfaceView implements Runnable {
 //            background2.x =ScreenX;
 //        } for moving screen (Error some bubble picture are doubled since bg moving)
 
+        if(difficulties == 1){
+            minSpeed= 4;
+        }else if(difficulties == 2){
+            minSpeed= 10;
+        }else if(difficulties == 3){
+            minSpeed= 15;
+        }else{
+            minSpeed= 4;
+        }
+
+
+        System.out.println(minSpeed);
+
+
         if(bonuscontainer.gettap){
             int bonusrand = random.nextInt((1000-0)+1)+0;
             if(bonusrand <=180 && bonusrand>=170){
@@ -199,7 +218,7 @@ public class GameView extends SurfaceView implements Runnable {
         }
 
         if(bonuscontainer.x +bonuscontainer.width <0){
-            int bound = (int) (20 *screenratX);
+            int bound = (int) (minSpeed+15 *screenratX);
             bonuscontainer.speed = random.nextInt(bound);
 
             int bonusrand = random.nextInt((100-0)+1)+0;
@@ -212,8 +231,8 @@ public class GameView extends SurfaceView implements Runnable {
             }
 
 
-            if(bonuscontainer.speed < 15*screenratX){
-                bonuscontainer.speed = (int) (15*screenratX);
+            if(bonuscontainer.speed < minSpeed+10*screenratX){
+                bonuscontainer.speed = (int) (minSpeed+10*screenratX);
             }
 
             bonuscontainer.x = ScreenX;
@@ -247,11 +266,11 @@ public class GameView extends SurfaceView implements Runnable {
 
             bubbl.setText(QuestionRandomizer(bubbl.isBubstat()));
 
-            int bound = (int) (9 *screenratX);
+            int bound = (int) (minSpeed+5 *screenratX);
             bubbl.speed = random.nextInt(bound);
 
-            if(bubbl.speed < 4*screenratX){
-                bubbl.speed = (int) (4*screenratX);
+            if(bubbl.speed < minSpeed*screenratX){
+                bubbl.speed = (int) (minSpeed*screenratX);
             }
 
             bubbl.x = ScreenX;
