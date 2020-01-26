@@ -2,7 +2,7 @@
 
 ![Main Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Mainscreen.jpg)
 
-More Pictures provided below.
+More Pictures and Video Preview  provided below.
 
 This app is used for Marking Purpose for subject CP3406 Mobile Computing.
 
@@ -37,6 +37,10 @@ This App Contains a Easy Kid Games that includes : Pattern, Memory, and Mathemat
 - Memory : Player must remember that 3 Bonus items functions.
 - Mathematical : Player must solve the question in the bubble and determine wheter its correct or False
 
+# Video Preview :
+![Video Preview](https://github.com/01richardrs/Educational-App/tree/master/VideoPreview)
+
+# Screen Preview :
 ![Setting Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Setting%20Page.jpg)
 ![Share Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Share.jpg)
 ![How To Play Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/HowTo%20Page.jpg)
@@ -46,5 +50,5 @@ This App Contains a Easy Kid Games that includes : Pattern, Memory, and Mathemat
 ![Bonus Item 2](https://github.com/01richardrs/Educational-App/blob/master/Screen/Bonus%20Item%202.jpg)
 ![Bonus Item 3](https://github.com/01richardrs/Educational-App/blob/master/Screen/Bonus%20Item3.jpg)
 ![Pause Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Pause%20Screen.jpg)
-![Game Over Screem](https://github.com/01richardrs/Educational-App/blob/master/Screen/Game%20Over.jpg)
+![Game Over Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Game%20Over.jpg)
 
