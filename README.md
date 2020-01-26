@@ -38,7 +38,7 @@ This App Contains a Easy Kid Games that includes : Pattern, Memory, and Mathemat
 - Mathematical : Player must solve the question in the bubble and determine wheter its correct or False
 
 # Video Preview :
-![Video Preview](https://github.com/01richardrs/Educational-App/tree/master/VideoPreview)
+Video Preview Link : https://github.com/01richardrs/Educational-App/tree/master/VideoPreview
 
 # Screen Preview :
 ![Setting Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Setting%20Page.jpg)
