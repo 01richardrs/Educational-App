@@ -1,5 +1,9 @@
 # Educational-App -  Math POP!
 
+![Main Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Mainscreen.jpg)
+
+More Pictures provided below.
+
 This app is used for Marking Purpose for subject CP3406 Mobile Computing.
 
 This App Contains a Easy Kid Games that includes : Pattern, Memory, and Mathematical Problems.
@@ -32,3 +36,15 @@ This App Contains a Easy Kid Games that includes : Pattern, Memory, and Mathemat
 - Pattern : This game Pattern is where the Poison Zone that will move every 60 Seconds.
 - Memory : Player must remember that 3 Bonus items functions.
 - Mathematical : Player must solve the question in the bubble and determine wheter its correct or False
+
+![Setting Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Setting%20Page.jpg)
+![Share Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Share.jpg)
+![How To Play Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/HowTo%20Page.jpg)
+![Leaderboard Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Leaderboard.jpg)
+![Difficulties Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Difficulties.jpg)
+![Bonus Item 1](https://github.com/01richardrs/Educational-App/blob/master/Screen/Bonus%20Item1.jpg)
+![Bonus Item 2](https://github.com/01richardrs/Educational-App/blob/master/Screen/Bonus%20Item%202.jpg)
+![Bonus Item 3](https://github.com/01richardrs/Educational-App/blob/master/Screen/Bonus%20Item3.jpg)
+![Pause Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Pause%20Screen.jpg)
+![Game Over Screem](https://github.com/01richardrs/Educational-App/blob/master/Screen/Game%20Over.jpg)
+
