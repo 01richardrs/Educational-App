@@ -9,10 +9,13 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pause"
+        <activity android:name=".Difficulties"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Translucent"
             ></activity>
+        <activity
+            android:name=".Pause"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Translucent" />
         <activity
             android:name=".HowToPlay"
             android:screenOrientation="landscape"
