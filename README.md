@@ -52,3 +52,8 @@ Video Preview Link : https://github.com/01richardrs/Educational-App/tree/master/
 ![Pause Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Pause%20Screen.jpg)
 ![Game Over Screen](https://github.com/01richardrs/Educational-App/blob/master/Screen/Game%20Over.jpg)
 
+# How to Try :
+Download .Apk files in this repository and try it out in Android Devices.
+  
+If issue occured, Please contact me.
+
